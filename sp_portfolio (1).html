@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SP Solaimanikandan | Electronics & Innovation Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --neon-cyan: #00f5ff;
+    --neon-orange: #ff6b35;
+    --neon-green: #39ff14;
+    --dark: #020810;
+    --dark2: #050d1a;
+    --dark3: #071524;
+    --glass: rgba(0,245,255,0.05);
+    --glass-border: rgba(0,245,255,0.15);
+    --text: #c8e8f0;
+    --text-dim: #5a8a9a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--neon-cyan);
+    border-radius: 50%;
+    position: fixed; z-index: 9999;
+    pointer-events: none;
+    transition: transform 0.1s;
+    box-shadow: 0 0 20px var(--neon-cyan);
+  }
+  .cursor-ring {
+    width: 40px; height: 40px;
+    border: 1px solid var(--neon-cyan);
+    border-radius: 50%;
+    position: fixed; z-index: 9998;
+    pointer-events: none;
+    transition: all 0.15s ease-out;
+    opacity: 0.5;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 2px; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    padding: 18px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(2,8,16,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.4rem; font-weight: 900;
+    color: var(--neon-cyan);
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px var(--neon-cyan);
+  }
+  .logo span { color: var(--neon-orange); }
+  nav ul { list-style: none; display: flex; gap: 40px; }
+  nav ul li a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 3px;
+    color: var(--text-dim);
+    text-decoration: none; text-transform: uppercase;
+    transition: all 0.3s;
+    position: relative;
+  }
+  nav ul li a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--neon-cyan);
+    transition: width 0.3s;
+  }
+  nav ul li a:hover { color: var(--neon-cyan); }
+  nav ul li a:hover::after { width: 100%; }
+
+  /* HERO */
+  #hero {
+    height: 100vh;
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0,245,255,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(255,107,53,0.06) 0%, transparent 50%),
+      var(--dark);
+  }
+  /* GRID OVERLAY */
+  .grid-overlay {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridScroll 20s linear infinite;
+  }
+  @keyframes gridScroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
+  /* ROBOT ARM BG */
+  .hero-robot-bg {
+    position: absolute; right: -5%; top: 50%;
+    transform: translateY(-50%);
+    width: 55%; height: 90%;
+    object-fit: contain;
+    opacity: 0.18;
+    filter: hue-rotate(180deg) saturate(2);
+    animation: robotFloat 6s ease-in-out infinite;
+  }
+  @keyframes robotFloat {
+    0%,100% { transform: translateY(-50%) scale(1) rotate(-1deg); }
+    50% { transform: translateY(-52%) scale(1.03) rotate(1deg); }
+  }
+  /* PCB BG element */
+  .pcb-bg {
+    position: absolute; left: -10%; bottom: -20%;
+    width: 60%; height: 80%;
+    object-fit: contain;
+    opacity: 0.07;
+    filter: hue-rotate(200deg) saturate(3);
+    animation: pcbPulse 8s ease-in-out infinite;
+  }
+  @keyframes pcbPulse {
+    0%,100% { opacity: 0.07; transform: scale(1); }
+    50% { opacity: 0.12; transform: scale(1.02); }
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 60px;
+    max-width: 700px;
+  }
+  .hero-eyebrow {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 5px;
+    color: var(--neon-cyan); text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px;
+    animation: fadeSlideUp 1s ease 0.2s both;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 40px; height: 1px;
+    background: var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan);
+  }
+  .hero-name {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 900; line-height: 1;
+    margin-bottom: 12px;
+    animation: fadeSlideUp 1s ease 0.4s both;
+  }
+  .hero-name .line1 { display: block; color: white; }
+  .hero-name .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-orange));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px rgba(0,245,255,0.5));
+  }
+  .hero-title {
+    font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 30px;
+    font-family: 'Share Tech Mono', monospace;
+    animation: fadeSlideUp 1s ease 0.6s both;
+  }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.8;
+    color: var(--text); max-width: 500px;
+    margin-bottom: 40px;
+    animation: fadeSlideUp 1s ease 0.8s both;
+  }
+  .hero-stats {
+    display: flex; gap: 40px; margin-bottom: 50px;
+    animation: fadeSlideUp 1s ease 1s both;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem; font-weight: 900;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 20px var(--neon-cyan);
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.65rem; letter-spacing: 3px;
+    color: var(--text-dim); text-transform: uppercase;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .hero-btns {
+    display: flex; gap: 20px;
+    animation: fadeSlideUp 1s ease 1.2s both;
+  }
+  .btn-primary {
+    padding: 14px 36px;
+    background: transparent;
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem; letter-spacing: 3px;
+    text-transform: uppercase; text-decoration: none;
+    position: relative; overflow: hidden;
+    transition: all 0.3s;
+    cursor: none;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  }
+  .btn-primary::before {
+    content: ''; position: absolute;
+    inset: 0; background: var(--neon-cyan);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+    z-index: -1;
+  }
+  .btn-primary:hover { color: var(--dark); box-shadow: 0 0 30px var(--neon-cyan); }
+  .btn-primary:hover::before { transform: scaleX(1); }
+  .btn-secondary {
+    padding: 14px 36px;
+    background: rgba(255,107,53,0.1);
+    border: 1px solid var(--neon-orange);
+    color: var(--neon-orange);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem; letter-spacing: 3px;
+    text-transform: uppercase; text-decoration: none;
+    transition: all 0.3s; cursor: none;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  }
+  .btn-secondary:hover {
+    background: var(--neon-orange); color: var(--dark);
+    box-shadow: 0 0 30px var(--neon-orange);
+  }
+  /* SCROLL INDICATOR */
+  .scroll-indicator {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .scroll-indicator span {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 4px; color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .scroll-line { width: 1px; height: 50px; background: linear-gradient(var(--neon-cyan), transparent); }
+  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
+
+  /* SECTIONS */
+  section { padding: 120px 60px; position: relative; }
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 6px;
+    color: var(--neon-cyan); text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .section-label::before {
+    content: ''; width: 30px; height: 1px;
+    background: var(--neon-cyan);
+  }
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900; line-height: 1.1;
+    margin-bottom: 60px;
+  }
+
+  /* ABOUT */
+  #about { background: var(--dark2); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  .about-image-wrap {
+    position: relative; height: 500px;
+  }
+  .about-img-main {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border: 1px solid var(--glass-border);
+    filter: saturate(1.5) hue-rotate(160deg);
+    animation: zoomPulse 8s ease-in-out infinite;
+  }
+  @keyframes zoomPulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+  .about-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,245,255,0.1), transparent, rgba(255,107,53,0.08));
+    pointer-events: none;
+  }
+  .about-corner {
+    position: absolute;
+    width: 20px; height: 20px;
+  }
+  .about-corner.tl { top: -1px; left: -1px; border-top: 2px solid var(--neon-cyan); border-left: 2px solid var(--neon-cyan); }
+  .about-corner.tr { top: -1px; right: -1px; border-top: 2px solid var(--neon-orange); border-right: 2px solid var(--neon-orange); }
+  .about-corner.bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--neon-orange); border-left: 2px solid var(--neon-orange); }
+  .about-corner.br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--neon-cyan); border-right: 2px solid var(--neon-cyan); }
+  .scan-line {
+    position: absolute; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+    opacity: 0.5;
+    animation: scan 4s linear infinite;
+  }
+  @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+  .about-text p { font-size: 1rem; line-height: 1.9; color: var(--text); margin-bottom: 20px; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .tag {
+    padding: 6px 16px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 2px;
+    color: var(--neon-cyan); text-transform: uppercase;
+    clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  }
+
+  /* SKILLS */
+  #skills { background: var(--dark3); }
+  .skills-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .skill-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 36px 30px;
+    position: relative; overflow: hidden;
+    transition: all 0.4s;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  }
+  .skill-card::before {
+    content: ''; position: absolute;
+    top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,245,255,0.05), transparent);
+    transition: left 0.6s;
+  }
+  .skill-card:hover::before { left: 100%; }
+  .skill-card:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 30px rgba(0,245,255,0.1), inset 0 0 30px rgba(0,245,255,0.03);
+    transform: translateY(-4px);
+  }
+  .skill-icon {
+    width: 50px; height: 50px; margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; color: var(--neon-cyan);
+    background: rgba(0,245,255,0.08);
+    border: 1px solid rgba(0,245,255,0.2);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+  .skill-card h3 {
+    font-family: 'Orbitron', monospace; font-size: 0.85rem;
+    font-weight: 700; letter-spacing: 2px;
+    color: white; margin-bottom: 12px; text-transform: uppercase;
+  }
+  .skill-card p { font-size: 0.88rem; line-height: 1.7; color: var(--text-dim); }
+  .skill-bar-wrap { margin-top: 16px; }
+  .skill-bar-label { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .skill-bar-label span { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 1px; }
+  .skill-bar { height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+  .skill-bar-fill {
+    height: 100%; border-radius: 2px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-orange));
+    box-shadow: 0 0 8px var(--neon-cyan);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 1.5s cubic-bezier(0.16,1,0.3,1);
+  }
+  .skill-bar-fill.animated { transform: scaleX(1); }
+
+  /* PROJECTS */
+  #projects { background: var(--dark2); }
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+  .project-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    overflow: hidden; position: relative;
+    transition: all 0.5s;
+  }
+  .project-card:first-child { grid-column: 1 / -1; }
+  .project-img {
+    width: 100%; height: 260px; object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    filter: saturate(1.2) hue-rotate(160deg);
+  }
+  .project-card:first-child .project-img { height: 380px; }
+  .project-card:hover .project-img { transform: scale(1.08); }
+  .project-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, rgba(2,8,16,0.95));
+    pointer-events: none;
+  }
+  .project-body { padding: 28px; }
+  .project-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(0,245,255,0.1); border: 1px solid rgba(0,245,255,0.3);
+    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; letter-spacing: 3px;
+    color: var(--neon-cyan); text-transform: uppercase;
+    margin-bottom: 14px;
+    clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  }
+  .project-badge.patent {
+    background: rgba(255,107,53,0.1); border-color: rgba(255,107,53,0.3);
+    color: var(--neon-orange);
+  }
+  .project-body h3 {
+    font-family: 'Orbitron', monospace; font-size: 1.1rem; font-weight: 700;
+    color: white; margin-bottom: 10px; letter-spacing: 1px;
+  }
+  .project-body p { font-size: 0.9rem; line-height: 1.7; color: var(--text-dim); }
+  .project-card:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0,245,255,0.08);
+    transform: translateY(-6px);
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--dark3); }
+  .timeline { position: relative; max-width: 900px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 20px; top: 0; bottom: 0;
+    width: 1px; background: linear-gradient(var(--neon-cyan), var(--neon-orange), transparent);
+  }
+  .timeline-item { padding-left: 70px; margin-bottom: 60px; position: relative; }
+  .timeline-dot {
+    position: absolute; left: 12px; top: 6px;
+    width: 18px; height: 18px;
+    background: var(--dark); border: 2px solid var(--neon-cyan);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    box-shadow: 0 0 15px var(--neon-cyan);
+  }
+  .timeline-date {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 3px;
+    color: var(--neon-cyan); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .timeline-title {
+    font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 700;
+    color: white; margin-bottom: 4px; letter-spacing: 1px;
+  }
+  .timeline-company { font-size: 0.85rem; color: var(--neon-orange); margin-bottom: 14px; letter-spacing: 1px; }
+  .timeline-desc { font-size: 0.9rem; line-height: 1.8; color: var(--text-dim); }
+
+  /* ACHIEVEMENTS */
+  #achievements { background: var(--dark2); }
+  .achievements-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .achievement-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    padding: 30px 24px; text-align: center;
+    position: relative; overflow: hidden;
+    transition: all 0.4s;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  }
+  .achievement-card:hover {
+    border-color: var(--neon-orange);
+    box-shadow: 0 0 30px rgba(255,107,53,0.15);
+    transform: translateY(-5px) scale(1.02);
+  }
+  .achievement-icon { font-size: 2.2rem; margin-bottom: 14px; }
+  .achievement-card h3 {
+    font-family: 'Orbitron', monospace; font-size: 0.8rem;
+    font-weight: 700; color: white; letter-spacing: 1px; margin-bottom: 8px;
+  }
+  .achievement-card p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.6; }
+
+  /* ROBOTICS SHOWCASE */
+  #robotics { background: var(--dark3); overflow: hidden; }
+  .robotics-inner {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center;
+  }
+  .robotics-content { }
+  .robotics-images {
+    position: relative; height: 500px;
+  }
+  .rob-img {
+    position: absolute; object-fit: cover;
+    border: 1px solid var(--glass-border);
+    filter: saturate(1.5) hue-rotate(160deg);
+  }
+  .rob-img-1 {
+    width: 65%; height: 65%;
+    top: 0; right: 0;
+    animation: roboFloat1 6s ease-in-out infinite;
+  }
+  .rob-img-2 {
+    width: 55%; height: 55%;
+    bottom: 0; left: 0;
+    animation: roboFloat2 7s ease-in-out infinite;
+    border-color: rgba(255,107,53,0.3);
+  }
+  @keyframes roboFloat1 { 0%,100% { transform: translateY(0) rotate(1deg); } 50% { transform: translateY(-12px) rotate(-1deg); } }
+  @keyframes roboFloat2 { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(12px) rotate(1deg); } }
+  .robotics-feature {
+    display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start;
+  }
+  .rf-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: var(--neon-cyan);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+  .rf-text h4 { font-family: 'Orbitron', monospace; font-size: 0.85rem; color: white; letter-spacing: 1px; margin-bottom: 4px; }
+  .rf-text p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
+
+  /* CONTACT */
+  #contact { background: var(--dark2); }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .contact-info { }
+  .contact-img {
+    width: 100%; height: 400px; object-fit: cover;
+    border: 1px solid var(--glass-border);
+    filter: saturate(1.5) hue-rotate(160deg);
+    animation: zoomPulse 8s ease-in-out infinite;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 24px;
+    background: var(--glass); border: 1px solid var(--glass-border);
+    text-decoration: none; color: var(--text);
+    transition: all 0.3s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .contact-link:hover {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0,245,255,0.1);
+    transform: translateX(6px);
+  }
+  .contact-link i { width: 20px; font-size: 1rem; color: var(--neon-cyan); }
+  .contact-link span { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; letter-spacing: 1px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid var(--glass-border);
+    padding: 40px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 2px; color: var(--text-dim); }
+  .footer-logo {
+    font-family: 'Orbitron', monospace; font-size: 1.2rem; font-weight: 900;
+    color: var(--neon-cyan); letter-spacing: 3px;
+    text-shadow: 0 0 20px var(--neon-cyan);
+  }
+
+  /* FLOATING PARTICLES */
+  .particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: var(--neon-cyan); opacity: 0;
+    animation: particleFly var(--dur, 8s) linear infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  @keyframes particleFly {
+    0% { opacity: 0; transform: translateY(100vh) scale(0); }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-100px) scale(1); }
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    overflow: hidden; border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 14px 0; background: rgba(0,245,255,0.02);
+  }
+  .marquee-track {
+    display: flex; gap: 60px; width: max-content;
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-item {
+    display: flex; align-items: center; gap: 16px; white-space: nowrap;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 4px;
+    color: var(--text-dim); text-transform: uppercase;
+  }
+  .marquee-item i { color: var(--neon-cyan); font-size: 0.7rem; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* GLITCH TEXT */
+  .glitch {
+    position: relative;
+    animation: glitch 4s infinite;
+  }
+  @keyframes glitch {
+    0%,95%,100% { text-shadow: none; }
+    96% { text-shadow: -2px 0 var(--neon-orange), 2px 0 var(--neon-cyan); }
+    97% { text-shadow: 2px 0 var(--neon-orange), -2px 0 var(--neon-cyan); }
+    98% { text-shadow: none; }
+    99% { text-shadow: -2px 0 var(--neon-cyan), 2px 0 var(--neon-orange); }
+  }
+
+  /* FADE IN ANIMATIONS */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* NCC / LEADERSHIP section */
+  #leadership { background: var(--dark); }
+  .leadership-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .lead-card {
+    padding: 32px 28px;
+    background: var(--glass); border: 1px solid var(--glass-border);
+    position: relative; overflow: hidden;
+    transition: all 0.4s;
+  }
+  .lead-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: linear-gradient(90deg, var(--neon-cyan), var(--neon-orange));
+    transform: scaleX(0); transition: transform 0.4s;
+  }
+  .lead-card:hover::after { transform: scaleX(1); }
+  .lead-card:hover { border-color: rgba(0,245,255,0.3); transform: translateY(-5px); }
+  .lead-num {
+    font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 900;
+    color: rgba(0,245,255,0.08); line-height: 1;
+    margin-bottom: -10px;
+  }
+  .lead-card h3 { font-family: 'Orbitron', monospace; font-size: 0.9rem; color: white; letter-spacing: 1px; margin-bottom: 10px; }
+  .lead-card p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.7; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav ul { gap: 20px; }
+    section { padding: 80px 24px; }
+    .about-grid, .contact-inner, .robotics-inner { grid-template-columns: 1fr; }
+    .skills-wrap { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .projects-grid .project-card:first-child { grid-column: 1; }
+    .achievements-grid { grid-template-columns: 1fr 1fr; }
+    .leadership-grid { grid-template-columns: 1fr; }
+    .hero-content { padding: 0 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">SP<span>.</span>S</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#achievements">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-overlay"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- Robot arm background image -->
+  <img class="hero-robot-bg" 
+    src="https://img.freepik.com/premium-photo/metal-arm-with-silver-arm-that-says-word-arm-it_1104726-14349.jpg"
+    alt="Robot Arm" onerror="this.style.display='none'">
+
+  <!-- PCB background image -->
+  <img class="pcb-bg"
+    src="https://img.freepik.com/free-photo/hard-drive-components-still-life-high-angle_26559784.htm"
+    alt="PCB" onerror="this.style.display='none'">
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Electronics & Innovation Engineer</div>
+    <h1 class="hero-name glitch">
+      <span class="line1">SP.</span>
+      <span class="line2">SOLAIMANIKANDAN</span>
+    </h1>
+    <div class="hero-title">ECE Student · Inventor · Team Lead · NCC Ranker</div>
+    <p class="hero-desc">
+      Building the future through embedded systems, robotics, and patent-grade innovations. 
+      9+ projects. Real-world impact. Tamil Nadu, India.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">9+</span>
+        <span class="stat-label">Projects Built</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Patent-Ready</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2×</span>
+        <span class="stat-label">National Winner</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">1+</span>
+        <span class="stat-label">Yr Industry Exp</span>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><i class="fas fa-microchip"></i> Embedded Systems</div>
+    <div class="marquee-item"><i class="fas fa-robot"></i> FANUC Robotics</div>
+    <div class="marquee-item"><i class="fas fa-wifi"></i> IoT Engineering</div>
+    <div class="marquee-item"><i class="fas fa-lightbulb"></i> Patent Innovator</div>
+    <div class="marquee-item"><i class="fas fa-trophy"></i> National Champion</div>
+    <div class="marquee-item"><i class="fas fa-brain"></i> AI Tools</div>
+    <div class="marquee-item"><i class="fas fa-drafting-compass"></i> AutoCAD</div>
+    <div class="marquee-item"><i class="fas fa-shield-alt"></i> NCC Trained</div>
+    <div class="marquee-item"><i class="fas fa-microchip"></i> Embedded Systems</div>
+    <div class="marquee-item"><i class="fas fa-robot"></i> FANUC Robotics</div>
+    <div class="marquee-item"><i class="fas fa-wifi"></i> IoT Engineering</div>
+    <div class="marquee-item"><i class="fas fa-lightbulb"></i> Patent Innovator</div>
+    <div class="marquee-item"><i class="fas fa-trophy"></i> National Champion</div>
+    <div class="marquee-item"><i class="fas fa-brain"></i> AI Tools</div>
+    <div class="marquee-item"><i class="fas fa-drafting-compass"></i> AutoCAD</div>
+    <div class="marquee-item"><i class="fas fa-shield-alt"></i> NCC Trained</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label reveal">01 / About</div>
+  <div class="about-grid">
+    <div class="about-image-wrap reveal">
+      <img class="about-img-main"
+        src="https://img.freepik.com/free-photo/robot-hand-finger-pointing-ai-technology_19002717.htm"
+        alt="AI Technology"
+        onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop'">
+      <div class="about-img-overlay"></div>
+      <div class="about-corner tl"></div>
+      <div class="about-corner tr"></div>
+      <div class="about-corner bl"></div>
+      <div class="about-corner br"></div>
+      <div class="scan-line"></div>
+    </div>
+    <div class="about-text reveal">
+      <div class="section-label">01 / About Me</div>
+      <h2 class="section-title" style="margin-bottom:30px;">Engineering <br><span style="color:var(--neon-cyan)">Innovation</span> &amp; Impact</h2>
+      <p>I'm an Electronics and Communication Engineering student from Tamil Nadu, India — driven by a passion for solving real-world problems through hands-on engineering, robotics, and intelligent systems.</p>
+      <p>With 9+ projects under my belt (including 4 patent-oriented innovations), I bridge the gap between theoretical knowledge and real-world application. My work spans IoT systems, embedded electronics, FANUC robot operation, and AI-assisted product development.</p>
+      <p>Currently developing <strong style="color:var(--neon-cyan);">ARIA</strong> — an AI-powered assistive wearable system targeting deployment within 2–3 months. As a 2× national competition winner and NCC top ranker, I lead teams and mentor junior engineers.</p>
+      <div class="about-tags">
+        <span class="tag">ECE Graduate</span>
+        <span class="tag">Tamil Nadu, IN</span>
+        <span class="tag">Team Lead</span>
+        <span class="tag">NCC Top Ranker</span>
+        <span class="tag">ISTE Member</span>
+        <span class="tag">Patent Developer</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label reveal">02 / Skills</div>
+  <h2 class="section-title reveal">Technical <span style="color:var(--neon-cyan);">Arsenal</span></h2>
+  <div class="skills-wrap">
+    <div class="skill-card reveal">
+      <div class="skill-icon"><i class="fas fa-microchip"></i></div>
+      <h3>Embedded Systems</h3>
+      <p>Deep hands-on experience designing, programming and testing embedded systems for IoT and automation applications.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Embedded C / MCU Programming</span><span>85%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="--w:0.85"></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon"><i class="fas fa-robot"></i></div>
+      <h3>Robotics & Automation</h3>
+      <p>Operated and programmed FANUC industrial robots in national-level competition environments. Practical automation engineering.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>FANUC Robot Handling</span><span>80%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="--w:0.80"></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon"><i class="fas fa-wifi"></i></div>
+      <h3>IoT Systems</h3>
+      <p>Built weather monitoring sondes and smart IoT systems with full-cycle development from design to deployment.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>IoT Design & Integration</span><span>82%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="--w:0.82"></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon"><i class="fas fa-drafting-compass"></i></div>
+      <h3>AutoCAD & Design</h3>
+      <p>Manual and AI-assisted AutoCAD for circuit layout, PCB design, and product prototype engineering.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>AutoCAD (Manual & AI)</span><span>75%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="--w:0.75"></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon"><i class="fas fa-brain"></i></div>
+      <h3>AI Tools & Prompt Eng.</h3>
+      <p>Google Cloud-certified prompt engineer. Skilled in ChatGPT, AI-assisted design, and integrating AI into real-world workflows.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>AI Tools & Prompting</span><span>88%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="--w:0.88"></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon"><i class="fas fa-lightbulb"></i></div>
+      <h3>Innovation & R&D</h3>
+      <p>Product development thinking with 4 patent-oriented innovations. Full-cycle R&D from problem identification to prototype.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Product & Innovation Thinking</span><span>90%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="--w:0.90"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label reveal">03 / Projects</div>
+  <h2 class="section-title reveal">Featured <span style="color:var(--neon-cyan);">Innovations</span></h2>
+  <div class="projects-grid">
+
+    <!-- ARIA - HERO PROJECT -->
+    <div class="project-card reveal">
+      <div style="position:relative;overflow:hidden;">
+        <img class="project-img"
+          src="https://img.freepik.com/premium-photo/metal-arm-with-silver-arm-that-says-word-arm-it_1104726-14349.jpg"
+          alt="ARIA AI System"
+          onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&auto=format'">
+        <div class="project-img-overlay"></div>
+      </div>
+      <div class="project-body">
+        <span class="project-badge patent">🔒 Patent-Oriented · Flagship</span>
+        <h3>ARIA – Assistive AI Wearable System</h3>
+        <p>Intelligent wearable system integrating sensors, embedded AI, and real-time feedback mechanisms. Designed to address critical real-world accessibility challenges. Currently in active development with 2–3 month deployment timeline. Full product-grade engineering with patent documentation in progress.</p>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card reveal">
+      <div style="position:relative;overflow:hidden;">
+        <img class="project-img"
+          src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop"
+          alt="PCB & Electronics">
+        <div class="project-img-overlay"></div>
+      </div>
+      <div class="project-body">
+        <span class="project-badge patent">🔒 Patent-Oriented</span>
+        <h3>Smart IoT-Based Monitoring Systems (×3)</h3>
+        <p>Three patent-ready IoT engineering projects tackling real-world monitoring and automation challenges. Embedded sensor fusion, wireless comms, and cloud-ready data pipelines.</p>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="project-card reveal">
+      <div style="position:relative;overflow:hidden;">
+        <img class="project-img"
+          src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&auto=format&fit=crop"
+          alt="Weather Sonde">
+        <div class="project-img-overlay"></div>
+      </div>
+      <div class="project-body">
+        <span class="project-badge">🌍 Abroad Collaboration</span>
+        <h3>Weather Sonde Monitoring System</h3>
+        <p>Full-cycle development of an atmospheric weather monitoring sonde during international R&D collaboration. Involved sensor calibration, data transmission, and field testing.</p>
+      </div>
+    </div>
+
+    <!-- PROJECT 4 -->
+    <div class="project-card reveal">
+      <div style="position:relative;overflow:hidden;">
+        <img class="project-img"
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop"
+          alt="Embedded Systems">
+        <div class="project-img-overlay"></div>
+      </div>
+      <div class="project-body">
+        <span class="project-badge">⚡ Embedded Systems</span>
+        <h3>Academic & Practical Engineering Projects (9 Total)</h3>
+        <p>Complete portfolio of 9 end-to-end engineering builds across embedded C, circuit design, PCB assembly, and IoT integration — all developed from scratch to working prototype.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ROBOTICS SHOWCASE -->
+<section id="robotics">
+  <div class="robotics-inner">
+    <div class="robotics-content reveal">
+      <div class="section-label">04 / Robotics</div>
+      <h2 class="section-title" style="margin-bottom:36px;">FANUC <span style="color:var(--neon-cyan)">Robot</span> Operation</h2>
+      <div class="robotics-feature">
+        <div class="rf-icon"><i class="fas fa-robot"></i></div>
+        <div class="rf-text">
+          <h4>Industrial Robot Control</h4>
+          <p>Hands-on FANUC robot arm operation and programming in a national-level competition setting — demonstrating precision, safety, and advanced automation skills.</p>
+        </div>
+      </div>
+      <div class="robotics-feature">
+        <div class="rf-icon"><i class="fas fa-cogs"></i></div>
+        <div class="rf-text">
+          <h4>Automation Engineering</h4>
+          <p>Practical experience integrating robotic systems with sensors, PLC logic, and feedback control for real manufacturing workflows.</p>
+        </div>
+      </div>
+      <div class="robotics-feature">
+        <div class="rf-icon"><i class="fas fa-trophy"></i></div>
+        <div class="rf-text">
+          <h4>National Competition Winner</h4>
+          <p>Won 2 national-level competitions within the core engineering department, including robotics-focused events showcasing technical depth under pressure.</p>
+        </div>
+      </div>
+    </div>
+    <div class="robotics-images reveal">
+      <img class="rob-img rob-img-1"
+        src="https://img.freepik.com/premium-photo/metal-arm-with-silver-arm-that-says-word-arm-it_1104726-14349.jpg"
+        alt="Robot Arm"
+        onerror="this.src='https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500&auto=format'">
+      <img class="rob-img rob-img-2"
+        src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500&auto=format&fit=crop"
+        alt="Robotics Lab">
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label reveal">05 / Experience</div>
+  <h2 class="section-title reveal">Industry <span style="color:var(--neon-cyan);">Journey</span></h2>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">6 Months · R&D</div>
+      <div class="timeline-title">R&D Intern</div>
+      <div class="timeline-company">Sertel Company</div>
+      <div class="timeline-desc">Contributed to end-to-end product development and innovation cycles. Worked on embedded product design, component integration, and iterative R&D problem-solving — gaining full product lifecycle exposure.</div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">International · Product Development</div>
+      <div class="timeline-title">Product Development Intern</div>
+      <div class="timeline-company">Sondes Project (Abroad Collaboration)</div>
+      <div class="timeline-desc">Built and tested a weather monitoring sonde system through international collaboration. Involved in full-cycle development including hardware assembly, sensor calibration, and field validation.</div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2 Weeks · Field Experience</div>
+      <div class="timeline-title">Technician Intern</div>
+      <div class="timeline-company">V-Guard Industries</div>
+      <div class="timeline-desc">Hands-on experience in industrial electrical systems, product servicing, and quality control operations. Gained practical exposure to large-scale manufacturing and electrical product assembly lines.</div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot" style="border-color:var(--neon-orange);box-shadow:0 0 15px var(--neon-orange)"></div>
+      <div class="timeline-date">Ongoing · Diploma ECE</div>
+      <div class="timeline-title">Electronics & Communication Engineering</div>
+      <div class="timeline-company">Diploma Program · Tamil Nadu</div>
+      <div class="timeline-desc">Pursuing Diploma in ECE with a focus on embedded systems, IoT, circuit design, and robotics. Active ISTE chapter mentor and NCC Training Officer alongside academics.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label reveal">06 / Achievements</div>
+  <h2 class="section-title reveal">Awards & <span style="color:var(--neon-cyan);">Recognition</span></h2>
+  <div class="achievements-grid">
+    <div class="achievement-card reveal">
+      <div class="achievement-icon">🥇</div>
+      <h3>2× National Champion</h3>
+      <p>Won two national-level engineering competitions in core ECE domain events.</p>
+    </div>
+    <div class="achievement-card reveal">
+      <div class="achievement-icon">🤖</div>
+      <h3>FANUC Robot Operator</h3>
+      <p>Competed and won using industrial-grade FANUC robotic arms at national level.</p>
+    </div>
+    <div class="achievement-card reveal">
+      <div class="achievement-icon">🔒</div>
+      <h3>4 Patent-Grade Projects</h3>
+      <p>Innovated and documented 4 patent-oriented engineering solutions addressing real needs.</p>
+    </div>
+    <div class="achievement-card reveal">
+      <div class="achievement-icon">🎖️</div>
+      <h3>NCC Top Ranker</h3>
+      <p>Top-ranked National Cadet Corps officer with leadership and discipline training.</p>
+    </div>
+    <div class="achievement-card reveal">
+      <div class="achievement-icon">☁️</div>
+      <h3>Google Cloud Certified</h3>
+      <p>Prompt Engineering Guide completion badge from Google Cloud.</p>
+    </div>
+    <div class="achievement-card reveal">
+      <div class="achievement-icon">👨‍🏫</div>
+      <h3>ISTE Mentor</h3>
+      <p>Guided 2nd-year engineering students as a mentor under ISTE student chapter.</p>
+    </div>
+    <div class="achievement-card reveal">
+      <div class="achievement-icon">🌐</div>
+      <h3>Abroad Collaboration</h3>
+      <p>International R&D collaboration on weather sonde product development.</p>
+    </div>
+    <div class="achievement-card reveal">
+      <div class="achievement-icon">⚡</div>
+      <h3>1+ Year Industry Exp</h3>
+      <p>Accumulated 1+ year across R&D, product development, and manufacturing internships.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="section-label reveal">07 / Leadership</div>
+  <h2 class="section-title reveal">Lead & <span style="color:var(--neon-cyan);">Mentor</span></h2>
+  <div class="leadership-grid">
+    <div class="lead-card reveal">
+      <div class="lead-num">01</div>
+      <h3>Project Team Lead</h3>
+      <p>Led all major project teams across 9+ builds. Managed planning, delegation, and technical direction from concept to prototype delivery.</p>
+    </div>
+    <div class="lead-card reveal">
+      <div class="lead-num">02</div>
+      <h3>ISTE Chapter Mentor</h3>
+      <p>Mentored 2nd-year ECE students in practical development, PCB design, and embedded system fundamentals under the ISTE student chapter.</p>
+    </div>
+    <div class="lead-card reveal">
+      <div class="lead-num">03</div>
+      <h3>NCC Training Officer</h3>
+      <p>Top-ranked NCC cadet who trained and led junior cadets — building discipline, coordination, and command skills alongside technical education.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-info reveal">
+      <div class="section-label">08 / Contact</div>
+      <h2 class="section-title" style="margin-bottom:20px;">Let's Build <br><span style="color:var(--neon-cyan)">Something</span> Real</h2>
+      <p style="font-size:1rem;line-height:1.8;color:var(--text-dim);max-width:440px;margin-bottom:10px;">
+        Open to R&D collaborations, product development opportunities, robotics projects, and innovation partnerships. Based in Tamil Nadu — ready to create impact globally.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:spsolaimanikandanmpcc1@gmail.com" class="contact-link">
+          <i class="fas fa-envelope"></i>
+          <span>spsolaimanikandanmpcc1@gmail.com</span>
+        </a>
+        <a href="tel:+919025920537" class="contact-link">
+          <i class="fas fa-phone"></i>
+          <span>+91 9025920537</span>
+        </a>
+        <a href="https://linkedin.com/in/sp-solaimanikandan" target="_blank" class="contact-link">
+          <i class="fab fa-linkedin"></i>
+          <span>SP. Solaimanikandan · LinkedIn</span>
+        </a>
+        <a href="https://github.com" target="_blank" class="contact-link">
+          <i class="fab fa-github"></i>
+          <span>GitHub · Projects & Code</span>
+        </a>
+        <a href="#" class="contact-link" style="border-color:rgba(255,107,53,0.3);color:var(--neon-orange);">
+          <i class="fas fa-map-marker-alt" style="color:var(--neon-orange)"></i>
+          <span>Tamil Nadu, India</span>
+        </a>
+      </div>
+    </div>
+    <div class="reveal">
+      <img class="contact-img"
+        src="https://img.freepik.com/premium-photo/metal-arm-with-silver-arm-that-says-word-arm-it_1104726-14349.jpg"
+        alt="Robotics"
+        onerror="this.src='https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500&auto=format'">
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">SP.S</div>
+    <p style="margin-top:8px;">Electronics & Communication Engineer · Tamil Nadu, India</p>
+  </div>
+  <div>
+    <p style="text-align:right;">SP SOLAIMANIKANDAN © 2025</p>
+    <p style="text-align:right;margin-top:4px;">Built with Innovation · Powered by Purpose</p>
+  </div>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 6 + 'px';
+    cursor.style.top = my - 6 + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx - 20 + 'px';
+    ring.style.top = ry - 20 + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a,button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; ring.style.opacity = '0.2'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.opacity = '0.5'; });
+  });
+
+  // PARTICLES
+  const pWrap = document.getElementById('particles');
+  for(let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 3 + 1;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      left:${Math.random()*100}%;
+      --dur:${6 + Math.random()*10}s;
+      --delay:${Math.random()*10}s;
+      ${Math.random() > 0.5 ? 'background:var(--neon-orange);' : ''}
+    `;
+    pWrap.appendChild(p);
+  }
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if(e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => revealObs.observe(el));
+
+  // SKILL BARS
+  const bars = document.querySelectorAll('.skill-bar-fill');
+  const barObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('animated');
+        barObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  bars.forEach(b => barObs.observe(b));
+
+  // PARALLAX on hero elements
+  window.addEventListener('scroll', () => {
+    const sy = window.scrollY;
+    const robotBg = document.querySelector('.hero-robot-bg');
+    const pcbBg = document.querySelector('.pcb-bg');
+    const heroContent = document.querySelector('.hero-content');
+    if(robotBg) robotBg.style.transform = `translateY(calc(-50% + ${sy * 0.3}px))`;
+    if(pcbBg) pcbBg.style.transform = `translateY(${sy * 0.15}px)`;
+    if(heroContent) heroContent.style.transform = `translateY(${sy * 0.2}px)`;
+  });
+
+  // GLITCH TEXT COUNTER ANIMATION
+  const statNums = document.querySelectorAll('.stat-num');
+  const statVals = ['9+', '4', '2×', '1+'];
+  statNums.forEach((el, i) => {
+    el.setAttribute('data-val', statVals[i]);
+  });
+
+  // NAV ACTIVE STATE
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => {
+      if(window.scrollY >= s.offsetTop - 200) cur = s.getAttribute('id');
+    });
+    document.querySelectorAll('nav ul li a').forEach(a => {
+      a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--neon-cyan)' : '';
+    });
+  });
+</script>
+</body>
+</html>
